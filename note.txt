@@ -1,0 +1,4 @@
+ajouter un caractere 'a' a la dernier ligne de mon fd et celui ci saffiche au 1er gnl de mon 2nd open, pourquoi ? 
+alors que data->fd a bien etais close et reopen, le gnl devrait etre a la 1er ligne 
+et non pas le caractere qui na pas etais gnl(car sarrete si gnl[0] != \n (et a et apres un \n)) 
+cela est lier au faite que le buffer du gnl est statique donc gqrde le a, il faut le vider 
