@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:35:46 by jgavairo          #+#    #+#             */
-/*   Updated: 2024/07/25 15:23:31 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/07/31 18:51:11 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ typedef struct s_data
 	int				width;
 	int				height;
 	int				nb_param;
-	int				end_param; //permet de connaitre le debut de la map pour le 2nd open permettant de de la cpy dans map sachant que le 1er parcours le fd jusqua \0 pour recuperer les dimensions
 	t_color			sky;
 	t_color			floor;
 	t_player		player;
@@ -177,11 +176,11 @@ typedef struct s_data
 
 	// La distance perpendiculaire entre le joueur et le mur touché par le rayon, utilisée pour corriger l'effet "fisheye".
 
-void 	raycasting(t_data *data, t_player *player);
-int 	ft_check_arg(t_data *data, char *arg_map);
-int 	ft_strlen_cub(char *s, int choice);
+int		ft_check_arg(t_data *data, char *arg_map);
 int		ft_get_texture(t_data *data);
+int		ft_strlen_cub(char *s, int choice);
 char	*ft_strdup_cub(char *str, int choice);
+void	raycasting(t_data *data, t_player *player);
 int		ft_fill_color_c(t_data *data, char *gnl, int	i);
 int		ft_fill_color_f(t_data *data, char *gnl, int	i);
 int		ft_get_color_c(t_data *data, char *gnl);

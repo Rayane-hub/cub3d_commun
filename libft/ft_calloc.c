@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgavairo <jgavairo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rasamad <rasamad@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:08:07 by rasamad           #+#    #+#             */
-/*   Updated: 2024/07/24 10:45:52 by jgavairo         ###   ########.fr       */
+/*   Updated: 2023/11/21 16:28:59 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	*ft_calloc(size_t nbelement, size_t size)
 	tmp = (void *)malloc(n);
 	if (!tmp)
 		return (NULL);
-	ft_bzero_lib(tmp, n);
+	ft_bzero(tmp, n);
 	return (tmp);
 }

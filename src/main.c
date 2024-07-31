@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:18:24 by jgavairo          #+#    #+#             */
-/*   Updated: 2024/07/25 18:24:26 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/07/31 18:55:26 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,7 @@ void	move_right(t_data *data)
 	}
 }
 
-int	key_press(int keycode, t_data *data)
+int	key_pres(int keycode, t_data *data)
 {
 	printf("keycode = %d\n", keycode);
 	if (keycode == 100)
@@ -285,7 +285,7 @@ void	start_and_dir(t_data *data, t_player *player)
 	// Dans quelle case de la carte nous sommes
 	data->rc.map_x = (int)player->pos_x;
 	data->rc.map_y = (int)player->pos_y;
-	// Longueur du rayon depuis la position actuelle jusqu'au prochain bord de case ( fabs pour passer en valeur absolue dans le cas ou nous nous orientons vers le negatif de la carte)
+	// Longueur du rayon depuis la position actuelle jusqu'au prochain bord de case ( fabs pour paser en valeur absolue dans le cas ou nous nous orientons vers le negatif de la carte)
 	data->rc.delta_dist_x = fabs(1 / data->rc.ray_dir_x);
 	data->rc.delta_dist_y = fabs(1 / data->rc.ray_dir_y);
 }
@@ -321,7 +321,7 @@ void	hit_checker(t_data *data)
 	data->rc.hit = 0;
 	while (data->rc.hit == 0)
 	{
-		// Passer à la prochaine case de la carte, soit en direction x, soit en direction y (on utilise fabs pour la valeur absolue, car si on avance ver une direction -- on veux savoir combien en ++)
+		// Paser à la prochaine case de la carte, soit en direction x, soit en direction y (on utilise fabs pour la valeur absolue, car si on avance ver une direction -- on veux savoir combien en ++)
 		if (data->rc.side_dist_x < data->rc.side_dist_y)
 		{
 			data->rc.side_dist_x += fabs(1 / data->rc.ray_dir_x);
@@ -342,12 +342,12 @@ void	hit_checker(t_data *data)
 
 void	col_wall_sizer(t_data *data, t_player *player)
 {
-	// calculer suivant si le mur est horizontal ou vertical le calcul qui sera necessaire au moment de dessiner le mur avec une taille differente en focntion de la distance
+	// calculer suivant si le mur est horizontal ou vertical le calcul qui sera necesaire au moment de desiner le mur avec une taille differente en focntion de la distance
 	if (data->rc.side == 0)
 		data->rc.perp_wall_dist = (data->rc.map_x - player->pos_x + (1 - (int)data->rc.delta_dist_x) / 2) / data->rc.ray_dir_x;
 	else
 		data->rc.perp_wall_dist = (data->rc.map_y - player->pos_y + (1 - (int)data->rc.delta_dist_y) / 2) / data->rc.ray_dir_y;
-	// Calculer la hauteur de la ligne à dessiner sur l'écran
+	// Calculer la hauteur de la ligne à desiner sur l'écran
 	data->rc.line_height = (int)(data->height / data->rc.perp_wall_dist);
 	// Calculer les pixels les plus bas et les plus hauts pour remplir la bande actuelle
 	data->rc.draw_start = -data->rc.line_height / 2 + data->height / 2;
@@ -383,7 +383,7 @@ void	wall_drawer(t_data *data, t_player *player)
 		data->rc.tex_x = data->textures[data->rc.tex_num].width - data->rc.tex_x - 1;
 	if (data->rc.side == 1 && data->rc.ray_dir_y < 0)
 		data->rc.tex_x = data->textures[data->rc.tex_num].width - data->rc.tex_x - 1;
-	// Dessiner les pixels de la bande en utilisant une boucle while
+	// Desiner les pixels de la bande en utilisant une boucle while
 	data->rc.y = data->rc.draw_start;
 	while (data->rc.y < data->rc.draw_end)
 	{
@@ -414,7 +414,7 @@ void mini_mapper(t_data *data)
     pos_x = data->width - (50);
     pos_y = 50;
 
-    // Dessiner la mini carte
+    // Desiner la mini carte
     while (x < size_x)
     {
         y = 0;
@@ -453,7 +453,6 @@ void mini_mapper(t_data *data)
     }
 }
 
-
 void	raycasting(t_data *data, t_player *player)
 {
 	data->rc.x = 0;
@@ -480,68 +479,77 @@ void	get_x_map(int *pt_x, char *gnl)
 		*pt_x = len_gnl;
 }
 
-int	ft_get_dimension_map(t_data	*data, int *pt_x, int *pt_y)
+int	ft_get_map(t_data *data)
 {
-	char	*gnl;
+	char	*s1;
+	char	*tmp_s1;
+	char	*s2;
 
-	printf("map : \n");
-	gnl = get_next_line(data->fd);
-	if (!gnl)
-		return (printf("Error\nGnl failed"), -1);
-	
-	while (gnl[0] == '\n'){
-		free(gnl);
-		gnl = get_next_line(data->fd);
-	}
-	while (gnl && gnl[0] != '\n')
-	{
-		get_x_map(&*pt_x, gnl);
-		printf("%s", gnl);
-		free(gnl);
-		gnl = get_next_line(data->fd);
-		*pt_y += 1;
-	}
-	if ((data->fd) == -1)
+	tmp_s1 = malloc(1); // Allouer un octet pour le caractère nul
+	if (!tmp_s1)
 		return (-1);
-	free(gnl); // Libérer la mémoire allouée par la dernière appel à get_ne*pt_xt_line
-	return (printf("--------------------------------------------\n"), 0);
+	tmp_s1[0] = '\0';
+	s2 = get_next_line(data->fd);
+	if (!s2)
+		return (free(tmp_s1), -1);
+	while (s2)
+	{
+		s1 = ft_strjoin(tmp_s1, s2);
+		if (!s1)
+			return (free(tmp_s1), free(s2), -1);
+		free(tmp_s1);
+		tmp_s1 = s1;
+		free(s2);
+		s2 = get_next_line(data->fd);
+	}
+	data->map = ft_split(tmp_s1, '\n');
+	free(tmp_s1);
+	return (0);
 }
 
-int	ft_get_map(t_data *data, char *filename)
+int	ft_check_line_map(t_data *data, char *s, int *nb_player, int y)
 {
-	int	x;
-	int	y;
-	char	*gnl;
+	int	i;
 
-	x = 0;
-	y = 0;
-	if (ft_get_dimension_map(data, &x, &y) != 0)
-		return (-1);
-	data->fd = open(filename, O_RDONLY);
-	if (data->fd == -1)
-		return (printf("Error\nOpen failed\n"), -1);
-	while (data->end_param > 0){
-		gnl = get_next_line(data->fd);
-		printf("param : %s", gnl);//"a" saffiche a la premiere iteration sur de la 1er ligne du fd "SO		./textures/text3.xpm\n"
-		data->end_param--;
-		free(gnl);
-	}
-	printf("map 2 : \n");
-	gnl = get_next_line(data->fd);
-	if (!gnl)
-		return (printf("Error\nGnl failed"), -1);
-	
-	while (gnl[0] == '\n'){
-		free(gnl);
-		gnl = get_next_line(data->fd);
-	}
-	while (gnl && gnl[0] != '\n')
+	i = 0;
+	while (s[i])
 	{
-		printf("%s", gnl);
-		free(gnl);
-		gnl = get_next_line(data->fd);
+		if (s[i] == 'N' || s[i] == 'S' || s[i] == 'W' || s[i] == 'O')
+		{
+			data->player.dir = s[i];
+			data->player.pos_x = i;
+			data->player.pos_y  = y;
+			*nb_player = *nb_player + 	 1;
+		}
+		if (s[i] != '1' && s[i] != '0' && s[i] != ' ' && s[i] != '\t'  && \
+			s[i] != 'N'&& s[i] != 'S' && s[i] != 'W' && s[i] != 'O' )
+			return (printf("Error\nInvalide caractere in map ----> |%c|\n", s[i]), -1);
+		i++;
 	}
-	printf("\nx = %d\ty = %d\tend_param = %d\n", x, y, data->end_param);
+	return (0);
+}
+/*
+int	ft_flood_fill(t_data *data)
+{
+	
+}*/
+
+int	ft_check_map(t_data *data)
+{
+	int	i;
+	int	nb_player;
+
+	i = 0;
+	nb_player = 0;
+	while (data->map[i])
+	{
+		if (ft_check_line_map(data, data->map[i], &nb_player, i) != 0)
+			return (-1);
+		i++;
+	}
+	if (nb_player != 1)
+		return (printf("Error\nIncorrect number of players\n"), -1);
+	//ft_flood_fill(data); GO CHECK SI MAP EST ENTOURER QUE PAR DES 1
 	return (0);
 }
 
@@ -549,14 +557,18 @@ int	ft_parser(t_data *data, int ac, char **av)
 {
 	if (ac != 2)
 		return (printf("Error\nNombre d'arguments incorrect\n"), -1);
-	if (ft_check_arg(data, av[1]) == 1)
+	if (ft_check_arg(data, av[1]) != 0)
 		return (printf("Error\nLe fichier de description de scène doit avoir pour extension .cub\n"), -1);
 	data->fd = open(av[1], O_RDONLY);
 	if (data->fd == -1)
 		return (printf("Error\nOpen failed\n"), -1);
 	if (ft_get_texture(data) < 6)
 		return (-1);
-	if (ft_get_map(data, av[1]) != 0)
+	if (ft_get_map(data) != 0)
+		return (-1);
+	if (ft_check_map(data) != 0)
+		return (-1);
+	if (ft_check_map(data) != 0)
 		return (-1);
 	return (0);
 }
@@ -565,8 +577,10 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	if (ft_parser(&data, argc, argv) == -1)
-		return (-1);
+	data.map = NULL;
+	if (ft_parser(&data, argc, argv) != 0)
+		return (ft_free_data(data), -1);
+	
 	/*player_init(&data.player);
 	data_init(&data);
 
@@ -574,11 +588,11 @@ int	main(int argc, char **argv)
 	mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
 
 	mlx_hook(data.win, 17, 0, close_window, &data);
-	mlx_hook(data.win, 2, 1L<<0, key_press, &data);
+	mlx_hook(data.win, 2, 1L<<0, key_pres, &data);
 
 	mlx_loop(data.mlx);*/
-	ft_free_data(data);
-	return (0);
+
+	return (ft_free_data(data), 0);
 }
 
 // gcc -Wall -Werror -Wextra main.c -L./minilibx-linux/ -lmlx_Linux -lX11 -lXext -lm -o cub3d
@@ -600,7 +614,7 @@ void hit_checker(t_data *data)
 
 void col_wall_sizer(t_data *data, t_player *player)
 
-    But : Calculer la taille du mur à dessiner.
+    But : Calculer la taille du mur à desiner.
     Ce qu'elle fait : Calcule la hauteur du mur en fonction de la distance entre le joueur et le mur.
 
 void wall_orientation(t_data *data)
@@ -610,16 +624,16 @@ void wall_orientation(t_data *data)
 
 void wall_drawer(t_data *data, t_player *player)
 
-    But : Dessiner le mur sur l'écran.
-    Ce qu'elle fait : Utilise la texture appropriée pour dessiner le mur, en fonction de l'endroit où il a été touché.
+    But : Desiner le mur sur l'écran.
+    Ce qu'elle fait : Utilise la texture appropriée pour desiner le mur, en fonction de l'endroit où il a été touché.
 
 void mini_mapper(t_data *data)
 
-    But : Dessiner une mini-carte de l'environnement.
+    But : Desiner une mini-carte de l'environnement.
     Ce qu'elle fait : Affiche une petite carte avec la position des murs et du joueur.
 
 void raycasting(t_data *data, t_player *player)
 
-    But : Lancer des rayons pour dessiner la scène.
-    Ce qu'elle fait : Utilise toutes les fonctions précédentes pour lancer des rayons et dessiner les murs, puis affiche la mini-carte
+    But : Lancer des rayons pour desiner la scène.
+    Ce qu'elle fait : Utilise toutes les fonctions précédentes pour lancer des rayons et desiner les murs, puis affiche la mini-carte
 */
