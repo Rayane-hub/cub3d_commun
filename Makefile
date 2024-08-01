@@ -18,7 +18,7 @@ GNL_DIR = gnl
 LIBFT_DIR = libft
 
 # Fichiers sources
-SRC = $(SRC_DIR)/main.c $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c $(PARSE_DIR)get_color.c $(PARSE_DIR)get_texture.c $(PARSE_DIR)utils.c 
+SRC = $(SRC_DIR)/main.c $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c $(PARSE_DIR)get_color.c $(PARSE_DIR)get_texture.c $(PARSE_DIR)utils.c $(PARSE_DIR)get_map.c
 
 # Fichiers objets
 OBJ = $(SRC:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:35:46 by jgavairo          #+#    #+#             */
-/*   Updated: 2024/07/31 18:51:11 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/01 17:58:43 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,18 +177,20 @@ typedef struct s_data
 	// La distance perpendiculaire entre le joueur et le mur touché par le rayon, utilisée pour corriger l'effet "fisheye".
 
 int		ft_check_arg(t_data *data, char *arg_map);
-int		ft_get_texture(t_data *data);
 int		ft_strlen_cub(char *s, int choice);
 char	*ft_strdup_cub(char *str, int choice);
-void	raycasting(t_data *data, t_player *player);
-int		ft_fill_color_c(t_data *data, char *gnl, int	i);
-int		ft_fill_color_f(t_data *data, char *gnl, int	i);
-int		ft_get_color_c(t_data *data, char *gnl);
-int		ft_get_color_f(t_data *data, char *gnl);
+int		ft_get_texture(t_data *data);
 int		ft_get_no(t_data *data, char *gnl);
 int		ft_get_so(t_data *data, char *gnl);
 int		ft_get_we(t_data *data, char *gnl);
 int		ft_get_ea(t_data *data, char *gnl);
+int		ft_fill_color_c(t_data *data, char *gnl, int	i);
+int		ft_fill_color_f(t_data *data, char *gnl, int	i);
+int		ft_get_color_c(t_data *data, char *gnl);
+int		ft_get_color_f(t_data *data, char *gnl);
+int		ft_get_map(t_data *data);
+
+void	raycasting(t_data *data, t_player *player);
 void	ft_free_data(t_data data);
 
 #endif

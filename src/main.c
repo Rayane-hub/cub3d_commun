@@ -6,12 +6,11 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:18:24 by jgavairo          #+#    #+#             */
-/*   Updated: 2024/07/31 18:55:26 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/01 17:58:32 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <string.h>
 
 #define M_PI 3.14159265358979323846
 
@@ -470,89 +469,6 @@ void	raycasting(t_data *data, t_player *player)
 	mini_mapper(data);
 }
 
-void	get_x_map(int *pt_x, char *gnl)
-{
-	int	len_gnl;
-
-	len_gnl = ft_strlen_cub(gnl, 2);
-	if (len_gnl > *pt_x)
-		*pt_x = len_gnl;
-}
-
-int	ft_get_map(t_data *data)
-{
-	char	*s1;
-	char	*tmp_s1;
-	char	*s2;
-
-	tmp_s1 = malloc(1); // Allouer un octet pour le caractère nul
-	if (!tmp_s1)
-		return (-1);
-	tmp_s1[0] = '\0';
-	s2 = get_next_line(data->fd);
-	if (!s2)
-		return (free(tmp_s1), -1);
-	while (s2)
-	{
-		s1 = ft_strjoin(tmp_s1, s2);
-		if (!s1)
-			return (free(tmp_s1), free(s2), -1);
-		free(tmp_s1);
-		tmp_s1 = s1;
-		free(s2);
-		s2 = get_next_line(data->fd);
-	}
-	data->map = ft_split(tmp_s1, '\n');
-	free(tmp_s1);
-	return (0);
-}
-
-int	ft_check_line_map(t_data *data, char *s, int *nb_player, int y)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == 'N' || s[i] == 'S' || s[i] == 'W' || s[i] == 'O')
-		{
-			data->player.dir = s[i];
-			data->player.pos_x = i;
-			data->player.pos_y  = y;
-			*nb_player = *nb_player + 	 1;
-		}
-		if (s[i] != '1' && s[i] != '0' && s[i] != ' ' && s[i] != '\t'  && \
-			s[i] != 'N'&& s[i] != 'S' && s[i] != 'W' && s[i] != 'O' )
-			return (printf("Error\nInvalide caractere in map ----> |%c|\n", s[i]), -1);
-		i++;
-	}
-	return (0);
-}
-/*
-int	ft_flood_fill(t_data *data)
-{
-	
-}*/
-
-int	ft_check_map(t_data *data)
-{
-	int	i;
-	int	nb_player;
-
-	i = 0;
-	nb_player = 0;
-	while (data->map[i])
-	{
-		if (ft_check_line_map(data, data->map[i], &nb_player, i) != 0)
-			return (-1);
-		i++;
-	}
-	if (nb_player != 1)
-		return (printf("Error\nIncorrect number of players\n"), -1);
-	//ft_flood_fill(data); GO CHECK SI MAP EST ENTOURER QUE PAR DES 1
-	return (0);
-}
-
 int	ft_parser(t_data *data, int ac, char **av)
 {
 	if (ac != 2)
@@ -566,10 +482,6 @@ int	ft_parser(t_data *data, int ac, char **av)
 		return (-1);
 	if (ft_get_map(data) != 0)
 		return (-1);
-	if (ft_check_map(data) != 0)
-		return (-1);
-	if (ft_check_map(data) != 0)
-		return (-1);
 	return (0);
 }
 
@@ -580,6 +492,7 @@ int	main(int argc, char **argv)
 	data.map = NULL;
 	if (ft_parser(&data, argc, argv) != 0)
 		return (ft_free_data(data), -1);
+	
 	
 	/*player_init(&data.player);
 	data_init(&data);

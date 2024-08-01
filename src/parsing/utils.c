@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:32:15 by rasamad           #+#    #+#             */
-/*   Updated: 2024/07/31 18:57:09 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/01 18:59:03 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	ft_strlen_cub(char *s, int choice)
 	if (choice == 0)
 		while (s[i])
 			i++;
-	else if (choice == 1)//jusqua un chiffre
+	else if (choice == 1)
 		while (s[i] && !(s[i] >= '0' && s[i] <= '9'))
 			i++;
-	else if (choice == 2)//jusqua \n
+	else if (choice == 2)
 		while (s[i] && s[i] != '\n')
 			i++;
 	return (i);
@@ -85,18 +85,14 @@ void	ft_free_data(t_data data)
 		free(data.textures[2].path);
 	if (data.textures[3].path)
 		free(data.textures[3].path);
-
 	i = 0;
 	if (!data.map)
-		return;
+		return ;
 	while (data.map[i])
 	{
 		printf("%s\n", data.map[i]);
 		free(data.map[i]);
 		i++;
 	}
-	printf("\n%d ligne\n", i);
-	printf("Player |%c|\tPos : x = %d\ty= %d\n", data.player.dir, (int)data.player.pos_x, (int)data.player.pos_y);	
-
 	free(data.map);
 }

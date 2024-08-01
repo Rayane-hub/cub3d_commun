@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:26:49 by rasamad           #+#    #+#             */
-/*   Updated: 2024/07/31 18:15:17 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/01 18:57:19 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int	ft_get_texture(t_data *data)
 
 	data->nb_param = 0;
 	gnl = get_next_line(data->fd);
+	if (!gnl)
+		return (printf("Error\nEmpty .cub"), -1);
 	while (gnl && data->nb_param < 6)
 	{
 		printf("%s", gnl);
@@ -105,7 +107,8 @@ int	ft_get_texture(t_data *data)
 		|| ft_get_color_f(data, gnl) == -1 || ft_get_color_c(data, gnl) == -1)
 			return (free(gnl), -1);
 		if (tmp_count == data->nb_param && gnl[0] != '\n')
-			return (printf("Error\nInvalid charatere in .cub\n"), free(gnl), -1);
+			return (printf("Error\nInvalid charatere in .cub\n"), \
+			free(gnl), -1);
 		free(gnl);
 		gnl = get_next_line(data->fd);
 	}
