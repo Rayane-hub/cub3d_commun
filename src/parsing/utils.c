@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:32:15 by rasamad           #+#    #+#             */
-/*   Updated: 2024/08/01 18:59:03 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/13 12:54:02 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ int	ft_strlen_cub(char *s, int choice)
 	return (i);
 }
 
+//Function	: Verifie l'extension de la map et initialise les elements de la struct data
+//Param 	: La struct data, et le nom de la map
+//Return	: ERROR --> 1 || SUCCESS --> 0
 int	ft_check_arg(t_data *data, char *arg_map)
 {
 	int	len;

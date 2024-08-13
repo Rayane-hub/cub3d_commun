@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:18:24 by jgavairo          #+#    #+#             */
-/*   Updated: 2024/08/01 17:58:32 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/13 13:32:04 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -469,6 +469,9 @@ void	raycasting(t_data *data, t_player *player)
 	mini_mapper(data);
 }
 
+//Function	: Lance le parsing du programme
+//Param 	: La struct data, le nombre et le contenue des argument du main
+//Return	: ERROR --> 1 || SUCCESS --> 0
 int	ft_parser(t_data *data, int ac, char **av)
 {
 	if (ac != 2)
@@ -492,7 +495,6 @@ int	main(int argc, char **argv)
 	data.map = NULL;
 	if (ft_parser(&data, argc, argv) != 0)
 		return (ft_free_data(data), -1);
-	
 	
 	/*player_init(&data.player);
 	data_init(&data);

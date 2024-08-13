@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:14:48 by rasamad           #+#    #+#             */
-/*   Updated: 2024/08/01 18:02:21 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/13 13:27:08 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ int	ft_fill_color_f(t_data *data, char *gnl, int i)
 	return (0);
 }
 
+//Function	: Recupere la couleur du ciel
+//Param 	: La struct data et la ligne contenant les valeurs RGB
+//Return	: ERROR --> -1 || SUCCESS --> 0
 int	ft_get_color_c(t_data *data, char *gnl)
 {
 	int	i;
@@ -91,6 +94,9 @@ int	ft_get_color_c(t_data *data, char *gnl)
 	return (0);
 }
 
+//Function	: Recupere la couleur du sol
+//Param 	: La struct data et la ligne contenant les valeurs RGB
+//Return	: ERROR --> -1 || SUCCESS --> 0
 int	ft_get_color_f(t_data *data, char *gnl)
 {
 	int	i;

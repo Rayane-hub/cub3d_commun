@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:26:49 by rasamad           #+#    #+#             */
-/*   Updated: 2024/08/01 18:57:19 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/13 13:27:37 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ int	ft_get_we(t_data *data, char *gnl)
 	return (0);
 }
 
+//Function	: Recupere la texture du mur east
+//Param 	: La struct data, la ligne lu dans le fd
+//Return	: ERROR --> -1 || SUCCESS --> 0
 int	ft_get_ea(t_data *data, char *gnl)
 {
 	int	i;
@@ -88,7 +91,9 @@ int	ft_get_ea(t_data *data, char *gnl)
 	return (0);
 }
 
-//return data->nb_param of texture or -1 for malloc error strdup or doublon
+//Function	: Recupere et verifie les textures et couleurs pour la map
+//Param 	: La struct data
+//Return	: ERROR --> -1 || le nombre de texture 
 int	ft_get_texture(t_data *data)
 {
 	char	*gnl;

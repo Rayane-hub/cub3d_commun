@@ -6,12 +6,15 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:35:09 by rasamad           #+#    #+#             */
-/*   Updated: 2024/08/01 19:07:39 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/13 13:22:52 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+//Function	: Remplie le char **map par la map correspondante dans le .cub
+//Param 	: La struct data contenant map et le fd du .cub
+//Return	: ERROR --> 1 || SUCCESS --> 0
 int	ft_fill_map(t_data *data)
 {
 	char	*s1;
@@ -40,6 +43,9 @@ int	ft_fill_map(t_data *data)
 	return (0);
 }
 
+//Function	: Verifie les char de la map et recupere l'orientaion et la pos du player
+//Param 	: La struct data, la ligne de la map a verifier (s), le nombre de player trouver, et le num de la ligne
+//Return	: ERROR --> 1 || SUCCESS --> 0
 int	ft_is_map_char_valid(t_data *data, char *s, int *nb_player, int y)
 {
 	int	i;
@@ -62,6 +68,9 @@ int	ft_is_map_char_valid(t_data *data, char *s, int *nb_player, int y)
 	return (0);
 }
 
+//Function	: Verifie autour de chaque char dans la map s'il nest pas a cote d'un espace ou d'une fin de map (\0)
+//Param 	: La struct data, l'indice i et j a verifier
+//Return	: ERROR --> 1 || SUCCESS --> 0
 int	ft_check_around_char(t_data *data, int i, int j)
 {
 	if (i == 0 && (data->map[i][j] != '1' && data->map[i][j] != ' '))
@@ -87,6 +96,9 @@ int	ft_check_around_char(t_data *data, int i, int j)
 	return (0);
 }
 
+//Function	: Verifie si la map est bien entourer par des murs
+//Param 	: La struct data
+//Return	: ERROR --> 1 || SUCCESS --> 0
 int	ft_is_map_enclosed_wall(t_data *data)
 {
 	int	i;
@@ -107,6 +119,9 @@ int	ft_is_map_enclosed_wall(t_data *data)
 	return (0);
 }
 
+//Function	: Recupere et verifie le contenue de la map
+//Param 	: La struct data
+//Return	: ERROR --> 1 || SUCCESS --> 0
 int	ft_get_map(t_data *data)
 {
 	int	i;
