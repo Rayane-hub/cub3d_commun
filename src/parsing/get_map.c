@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:35:09 by rasamad           #+#    #+#             */
-/*   Updated: 2024/08/15 13:36:56 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/15 13:52:51 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_is_map_char_valid(t_data *data, char *s, int *nb_player, int y)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == 'N' || s[i] == 'S' || s[i] == 'W' || s[i] == 'O')
+		if (s[i] == 'N' || s[i] == 'S' || s[i] == 'W' || s[i] == 'E')
 		{
 			data->player.dir = s[i];
 			data->player.pos_x = i;
@@ -82,7 +82,7 @@ int	ft_is_map_char_valid(t_data *data, char *s, int *nb_player, int y)
 			*nb_player = *nb_player + 1;
 		}
 		if (s[i] != '1' && s[i] != '0' && s[i] != ' ' && s[i] != '\t' && \
-			s[i] != 'N' && s[i] != 'S' && s[i] != 'W' && s[i] != 'O')
+			s[i] != 'N' && s[i] != 'S' && s[i] != 'W' && s[i] != 'E')
 			return (printf("Error\nInvalid char in map |%c|\n", s[i]), -1);
 		i++;
 	}

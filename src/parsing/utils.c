@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:32:15 by rasamad           #+#    #+#             */
-/*   Updated: 2024/08/15 13:46:17 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/15 15:15:50 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ int	ft_check_arg(t_data *data, char *arg_map)
 {
 	int	len;
 
+	data->map = NULL;
+	data->m = NULL;
+	data->textures[0].path = NULL;
+	data->textures[1].path = NULL;
+	data->textures[2].path = NULL;
+	data->textures[3].path = NULL;
+	data->floor.check = false;
+	data->sky.check = false;
 	len = ft_strlen_cub(arg_map, 0);
 	if (len <= 4)
 		return (-1);
@@ -47,14 +55,6 @@ int	ft_check_arg(t_data *data, char *arg_map)
 		return (-1);
 	if (arg_map[len - 1] != 'b')
 		return (-1);
-	data->map = NULL;
-	data->m = NULL;
-	data->textures[0].path = NULL;
-	data->textures[1].path = NULL;
-	data->textures[2].path = NULL;
-	data->textures[3].path = NULL;
-	data->floor.check = false;
-	data->sky.check = false;
 	return (0);
 }
 
@@ -93,6 +93,8 @@ void	ft_strcpy(char *dst, const char *src)
 
 void	ft_free_data(t_data data)
 {
+	printf("\nF (R %d\tG %d\tB %d)\n", data.floor.r, data.floor.g, data.floor.b);
+	printf("C (R %d\tG %d\tB %d)\n", data.sky.r, data.sky.g, data.sky.b);
 	int	i;
 
 	if (data.textures[0].path)
