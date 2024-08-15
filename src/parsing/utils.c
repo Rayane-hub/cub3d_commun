@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:32:15 by rasamad           #+#    #+#             */
-/*   Updated: 2024/08/13 12:54:02 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/15 13:46:17 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	ft_check_arg(t_data *data, char *arg_map)
 		return (-1);
 	if (arg_map[len - 1] != 'b')
 		return (-1);
+	data->map = NULL;
+	data->m = NULL;
 	data->textures[0].path = NULL;
 	data->textures[1].path = NULL;
 	data->textures[2].path = NULL;
@@ -76,6 +78,19 @@ char	*ft_strdup_cub(char *str, int choice)
 	return (tmp);
 }
 
+void	ft_strcpy(char *dst, const char *src)
+{
+	size_t	i;
+
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+}
+
 void	ft_free_data(t_data data)
 {
 	int	i;
@@ -88,12 +103,27 @@ void	ft_free_data(t_data data)
 		free(data.textures[2].path);
 	if (data.textures[3].path)
 		free(data.textures[3].path);
+
+	
+	
+	
+	i = 0;
+	if (!data.m)
+		return ;
+	while (data.m[i])
+	{
+		printf("%s\n", data.m[i]);
+		free(data.m[i]);
+		i++;
+	}
+	free(data.m);
 	i = 0;
 	if (!data.map)
 		return ;
 	while (data.map[i])
 	{
 		printf("%s\n", data.map[i]);
+
 		free(data.map[i]);
 		i++;
 	}

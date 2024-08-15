@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:35:46 by jgavairo          #+#    #+#             */
-/*   Updated: 2024/08/01 17:58:43 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/14 17:36:27 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct s_data
 	void			*img;
 	char			*addr;
 	char			**map;
+	char			**m;
 	int				fd;
 	int				bits_per_pixel;
 	int				floor_color;
@@ -116,6 +117,8 @@ typedef struct s_data
 	int				endian;
 	int				width;
 	int				height;
+	int				size_x;
+	int				size_y;
 	int				nb_param;
 	t_color			sky;
 	t_color			floor;
@@ -179,6 +182,7 @@ typedef struct s_data
 int		ft_check_arg(t_data *data, char *arg_map);
 int		ft_strlen_cub(char *s, int choice);
 char	*ft_strdup_cub(char *str, int choice);
+void	ft_strcpy(char *dst, const char *src);
 int		ft_get_texture(t_data *data);
 int		ft_get_no(t_data *data, char *gnl);
 int		ft_get_so(t_data *data, char *gnl);
@@ -189,7 +193,8 @@ int		ft_fill_color_f(t_data *data, char *gnl, int	i);
 int		ft_get_color_c(t_data *data, char *gnl);
 int		ft_get_color_f(t_data *data, char *gnl);
 int		ft_get_map(t_data *data);
-
+int		ft_is_map_enclosed_wall(t_data *data);
+int		ft_cpy_map(t_data *data);
 void	raycasting(t_data *data, t_player *player);
 void	ft_free_data(t_data data);
 

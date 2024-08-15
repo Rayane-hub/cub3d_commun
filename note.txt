@@ -1,11 +1,12 @@
-
+◦ Sauf pour la map elle-même, les informations de chaque élément peuvent être
+séparées par un ou plusieurs espace(s).
 
 comment verifier la validiter des xpm ?
 
 est ce que le manque de mur en diago est valide
  1111
 100E1
-11111		
+11111
 
 a quoi sert dans la struct player
 	double			dir_x;
@@ -13,3 +14,4 @@ a quoi sert dans la struct player
 	double			plane_x;
 	double			plane_y;
 	double			move_speed;
+

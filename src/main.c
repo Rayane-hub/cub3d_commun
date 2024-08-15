@@ -6,7 +6,7 @@
 /*   By: rasamad <rasamad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:18:24 by jgavairo          #+#    #+#             */
-/*   Updated: 2024/08/13 13:32:04 by rasamad          ###   ########.fr       */
+/*   Updated: 2024/08/15 13:42:51 by rasamad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -492,10 +492,9 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	data.map = NULL;
 	if (ft_parser(&data, argc, argv) != 0)
 		return (ft_free_data(data), -1);
-	
+
 	/*player_init(&data.player);
 	data_init(&data);
 
@@ -506,7 +505,6 @@ int	main(int argc, char **argv)
 	mlx_hook(data.win, 2, 1L<<0, key_pres, &data);
 
 	mlx_loop(data.mlx);*/
-
 	return (ft_free_data(data), 0);
 }
 
